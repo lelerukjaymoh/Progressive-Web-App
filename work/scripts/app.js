@@ -170,6 +170,7 @@
     request.onreadystatechange = function() {
       if (request.readyState === XMLHttpRequest.DONE) {
         if (request.status === 200) {
+          print('Done');
           var response = JSON.parse(request.response);
           var results = response.query.results;
           results.key = key;
@@ -342,4 +343,10 @@
   }
 
   // TODO add service worker code here
+
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker
+             .register('../service-worker.js')
+             .then(function() { console.log('Service Worker Registered'); });
+  }
 })();
